@@ -13,7 +13,7 @@ app_name = UsersConfig.name
 
 router = DefaultRouter()
 
-router.register(r'', CustomUserViewSet, basename='users')
+router.register(r'users', CustomUserViewSet, basename='users')
 
 
 urlpatterns = [

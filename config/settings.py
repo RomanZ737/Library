@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'drf_yasg',
     'django_celery_beat',
+    'django_filters',
 
     'users',
     'books',
@@ -138,12 +139,12 @@ CELERY_TASK_TRACK_STARTED = True
 # Максимальное время на выполнение задачи
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
-CELERY_BEAT_SCHEDULE = {
-    'check_active_users': {
-        'task': 'lms.tasks.check_user_last_login',
-        'schedule': timedelta(days=1),
-    },
-}
+# CELERY_BEAT_SCHEDULE = {
+#     'check_active_users': {
+#         'task': 'lms.tasks.check_user_last_login',
+#         'schedule': timedelta(days=1),
+#     },
+# }
 
 STATIC_URL = 'static/'
 
@@ -164,16 +165,10 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.1/howto/static-files/
-
-STATIC_URL = 'static/'
-
-
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
-MAILERS = {
+EMAIL_BACKEND = {
     'default': {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },

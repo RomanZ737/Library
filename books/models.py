@@ -2,6 +2,12 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from users.models import CustomUser
 from django.utils import timezone
+from datetime import timedelta
+from django.utils import timezone
+
+
+def rent_period():
+    return  timezone.localdate() + timedelta(days=30)
 
 
 class BookGenre(models.TextChoices):
@@ -73,11 +79,13 @@ class BookMark(models.Model):
 
 
 class BookRent(models.Model):
+
     book = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name='Book', help_text='Книга')
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='User', help_text='Пользователь')
     rented_date = models.DateField(verbose_name='Rent start Date',
                                    help_text='Дата начала аренды', default=timezone.localdate)
-    rented_date_end = models.DateField(verbose_name='Rent end Date', help_text='Дата окончания аренды')
+    rented_date_end = models.DateField(verbose_name='Rent end Date', help_text='Дата окончания аренды',
+                                       default=rent_period)
     comment = models.TextField(verbose_name='Comment', help_text='Комментарий', null=True, blank=True)
 
     class Meta:
