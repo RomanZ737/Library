@@ -1,5 +1,5 @@
 from rest_framework.permissions import BasePermission
-from django.contrib.auth.models import Group
+
 
 class IsOwner(BasePermission):
 
@@ -8,8 +8,15 @@ class IsOwner(BasePermission):
             return True
         return False
 
+
 class IsAdminGroup(BasePermission):
 
     def has_permission(self, request, view):
-        return True if (request.user.is_superuser or
-                        request.user.groups.filter(name='Администраторы').exists()) else False
+        return (
+            True
+            if (
+                request.user.is_superuser
+                or request.user.groups.filter(name="Администраторы").exists()
+            )
+            else False
+        )

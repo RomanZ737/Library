@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Виртуальное окружение
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Тесты и покрытие
+.coverage
+coverage.txt
+htmlcov/
+.pytest_cache/
+
+# Docker
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Логи
+*.log
+logs/
+
+# Базы данных
+*.sqlite3
+db.sqlite3
+
+# Медиа и статика
+media/
+staticfiles/
+static/
+
+# Секреты
+.env
+.env.*
+*.pem
+*.key
+
+# Документация
+README.md
+structure.txt
+*.md
+
+# Nginx
+nginx/

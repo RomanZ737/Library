@@ -10,77 +10,114 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('books', '0001_initial'),
+        ("books", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='bookmark',
-            options={'ordering': ['book__name'], 'verbose_name': 'Оценка', 'verbose_name_plural': 'Оценки'},
+            name="bookmark",
+            options={
+                "ordering": ["book__name"],
+                "verbose_name": "Оценка",
+                "verbose_name_plural": "Оценки",
+            },
         ),
         migrations.AlterUniqueTogether(
-            name='bookrent',
+            name="bookrent",
             unique_together=set(),
         ),
         migrations.RemoveField(
-            model_name='bookmark',
-            name='mark_summ',
+            model_name="bookmark",
+            name="mark_summ",
         ),
         migrations.RemoveField(
-            model_name='bookmark',
-            name='number_of_marks',
+            model_name="bookmark",
+            name="number_of_marks",
         ),
         migrations.RemoveField(
-            model_name='bookmark',
-            name='total_mark',
+            model_name="bookmark",
+            name="total_mark",
         ),
         migrations.AddField(
-            model_name='book',
-            name='mark_summ',
-            field=models.IntegerField(default=0, help_text='Сумма оценок', verbose_name='Summ of Marks'),
+            model_name="book",
+            name="mark_summ",
+            field=models.IntegerField(
+                default=0, help_text="Сумма оценок", verbose_name="Summ of Marks"
+            ),
         ),
         migrations.AddField(
-            model_name='book',
-            name='number_of_marks',
-            field=models.IntegerField(default=0, help_text='Количество оценок', verbose_name='Marks Count'),
+            model_name="book",
+            name="number_of_marks",
+            field=models.IntegerField(
+                default=0, help_text="Количество оценок", verbose_name="Marks Count"
+            ),
         ),
         migrations.AddField(
-            model_name='book',
-            name='total_mark',
-            field=models.FloatField(default=0, help_text='Общая оценка (средняя)', verbose_name='Total Mark'),
+            model_name="book",
+            name="total_mark",
+            field=models.FloatField(
+                default=0, help_text="Общая оценка (средняя)", verbose_name="Total Mark"
+            ),
         ),
         migrations.AddField(
-            model_name='bookmark',
-            name='mark',
-            field=models.IntegerField(default=0, help_text='Оценка', validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(5)], verbose_name='Mark'),
+            model_name="bookmark",
+            name="mark",
+            field=models.IntegerField(
+                default=0,
+                help_text="Оценка",
+                validators=[
+                    django.core.validators.MinValueValidator(0),
+                    django.core.validators.MaxValueValidator(5),
+                ],
+                verbose_name="Mark",
+            ),
         ),
         migrations.AddField(
-            model_name='bookmark',
-            name='user',
-            field=models.ForeignKey(blank=True, help_text='Пользователь', null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL, verbose_name='User'),
+            model_name="bookmark",
+            name="user",
+            field=models.ForeignKey(
+                blank=True,
+                help_text="Пользователь",
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="User",
+            ),
         ),
         migrations.AlterField(
-            model_name='book',
-            name='annotation',
-            field=models.TextField(help_text='Аннотация книги', verbose_name='Annotation'),
+            model_name="book",
+            name="annotation",
+            field=models.TextField(
+                help_text="Аннотация книги", verbose_name="Annotation"
+            ),
         ),
         migrations.AlterField(
-            model_name='bookrent',
-            name='comment',
-            field=models.TextField(blank=True, help_text='Комментарий', null=True, verbose_name='Comment'),
+            model_name="bookrent",
+            name="comment",
+            field=models.TextField(
+                blank=True, help_text="Комментарий", null=True, verbose_name="Comment"
+            ),
         ),
         migrations.AlterField(
-            model_name='bookrent',
-            name='rented_date',
-            field=models.DateField(default=django.utils.timezone.localdate, help_text='Дата начала аренды', verbose_name='Rent start Date'),
+            model_name="bookrent",
+            name="rented_date",
+            field=models.DateField(
+                default=django.utils.timezone.localdate,
+                help_text="Дата начала аренды",
+                verbose_name="Rent start Date",
+            ),
         ),
         migrations.AddConstraint(
-            model_name='bookmark',
-            constraint=models.UniqueConstraint(fields=('user', 'book'), name='unique_mark_per_user_book'),
+            model_name="bookmark",
+            constraint=models.UniqueConstraint(
+                fields=("user", "book"), name="unique_mark_per_user_book"
+            ),
         ),
         migrations.AddConstraint(
-            model_name='bookrent',
-            constraint=models.UniqueConstraint(fields=('book',), name='unique_active_rent_per_book'),
+            model_name="bookrent",
+            constraint=models.UniqueConstraint(
+                fields=("book",), name="unique_active_rent_per_book"
+            ),
         ),
     ]
